@@ -37,6 +37,10 @@ public class Hangman {
 	}
 	
 	private void markCorrectGuess(final char letter) {
-		status[getIndexOfLetterInWord(letter)]=letter;
+		for (int i = 0; i < word.length();i++) {
+			if(word.charAt(i)==letter) {
+				status[i] = letter;
+			}
+		}
 	}
 }

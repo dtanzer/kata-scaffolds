@@ -59,4 +59,18 @@ public class HangmanTest {
 		assertArrayEquals("status", expected, status);
 	}
 	
+	
+	@Test
+	public void shouldShowEveryOccurenceOfLetterForRightGuess() {
+		String word = "abcb";
+		char inWord = 'b';
+		hangman = Hangman.start(word);
+		
+		hangman.guess(inWord);
+		
+		char[] status = hangman.getStatus();
+		char[] expected = {'_', 'b', '_','b'};
+		assertArrayEquals("status", expected, status);
+	}
+	
 }
