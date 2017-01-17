@@ -73,4 +73,19 @@ public class HangmanTest {
 		assertArrayEquals("status", expected, status);
 	}
 	
+	@Test
+	public void gameIsLostOnElevenWrongGuesses() {
+		String word = "abcb";
+		char inWord = 'e';
+		hangman = Hangman.start(word);
+		
+		for(int i=0; i<12; i++){
+			hangman.guess(inWord);
+		}
+		
+		char[] status = hangman.getStatus();
+		char[] expected = {'L', 'O', 'S', 'T'};
+		assertArrayEquals("status", expected, status);
+	}
+	
 }

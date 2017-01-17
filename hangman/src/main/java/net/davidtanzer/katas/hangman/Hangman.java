@@ -24,16 +24,12 @@ public class Hangman {
 	}
 	
 	public void guess(final char letter) {
-		boolean letterIsInWord = getIndexOfLetterInWord(letter) > -1;
+		boolean letterIsInWord = word.indexOf(letter) > -1;
 		if (letterIsInWord) {
 			markCorrectGuess(letter);
 		} else {
 			wrongGuesses++;
 		}
-	}
-	
-	private int getIndexOfLetterInWord(final char letter) {
-		return word.indexOf(letter);
 	}
 	
 	private void markCorrectGuess(final char letter) {
