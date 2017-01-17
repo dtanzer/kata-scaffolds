@@ -1,24 +1,22 @@
 package net.davidtanzer.katas.hangman;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Hangman {
 	
+	private final String word;
+	private final char[] status;
 	private int wrongGuesses;
-	private String word ;
+	
+	public static Hangman start(final String word) {
+		return new Hangman(word);
+	}
 	
 	private Hangman(final String word) {
 		this.word = word;
+		this.status = word.replaceAll(".", "_").toCharArray();
 	}
 	
 	public char[] getStatus() {
-		char [] x = {'_','_','_','_','_'} ;
-		return x;
-	}
-	
-	public static Hangman start(final String word) {
-		return new Hangman(word) ;
+		return status;
 	}
 	
 	public int getWrongGuesses() {
@@ -26,9 +24,19 @@ public class Hangman {
 	}
 	
 	public void guess(final char letter) {
-		boolean letterIsInWord = word.indexOf(letter) > -1;
-		if (!letterIsInWord){
+		boolean letterIsInWord = getIndexOfLetterInWord(letter) > -1;
+		if (letterIsInWord) {
+			markCorrectGuess(letter);
+		} else {
 			wrongGuesses++;
 		}
+	}
+	
+	private int getIndexOfLetterInWord(final char letter) {
+		return word.indexOf(letter);
+	}
+	
+	private void markCorrectGuess(final char letter) {
+		status[getIndexOfLetterInWord(letter)]=letter;
 	}
 }

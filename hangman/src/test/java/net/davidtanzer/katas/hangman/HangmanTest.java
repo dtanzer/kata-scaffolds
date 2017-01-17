@@ -10,7 +10,7 @@ public class HangmanTest {
 	private Hangman hangman;
 	
 	@Test
-	public void shouldAnUnderscoreForEveryLetterInWordOnStart() {
+	public void shouldShowUnderscoreForEveryLetterInWordOnStart() {
 		String word = "test1";
 		
 		hangman = Hangman.start(word);
@@ -31,8 +31,6 @@ public class HangmanTest {
 		hangman.guess(notInWord);
 		
 		assertEquals("wrongGuesses", wrongGuesses + 1, hangman.getWrongGuesses());
-		
-		
 	}
 	
 	@Test
@@ -45,7 +43,20 @@ public class HangmanTest {
 		
 		hangman.guess(inWord);
 		
-		assertEquals("wrongGuesses", wrongGuesses,
-				hangman.getWrongGuesses());
+		assertEquals("wrongGuesses", wrongGuesses, hangman.getWrongGuesses());
 	}
+	
+	@Test
+	public void shouldShowLetterForRightGuess() {
+		String word = "abc";
+		char inWord = 'b';
+		hangman = Hangman.start(word);
+		
+		hangman.guess(inWord);
+		
+		char[] status = hangman.getStatus();
+		char[] expected = {'_', 'b', '_'};
+		assertArrayEquals("status", expected, status);
+	}
+	
 }
